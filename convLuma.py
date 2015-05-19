@@ -1,14 +1,16 @@
 import sys
 
-#Entradas: video, w, h, nF
+#Entradas: video, nF
 
-video = sys.argv[1]
-w = int(sys.argv[2])
-h = int(sys.argv[3])
-nF = int(sys.argv[4])
+video = sys.argv[1] + ".yuv"
+nF = int(sys.argv[2])
 out = "../../Results/convLuma_" + video
 
-def convLuma(seq, w, h, nF):
+def convLuma(seq, nF):
+	size = seq.split("_")
+	size = size[1].split("x")
+	h = int(size[0])
+	w = int(size[1])
 	f = open("../../origCfP/" + seq, 'rb')
 	r = open(out, 'wb')
 	res = h * w
@@ -20,4 +22,4 @@ def convLuma(seq, w, h, nF):
 	f.close()
 	r.close()
 
-convLuma(video, w, h, nF)
+convLuma(video, nF)
